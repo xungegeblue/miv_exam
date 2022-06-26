@@ -1,5 +1,9 @@
 <!--index.wxml-->
-<view class="container">
-  hello 小程序 ！
+<view>
+	<swiper autoplay="true" interval="1000" circular="true" indicator-dots="true" indicator-color="white" indicator-active-color="black" style="width: 100%;">
+		<swiper-item  wx:for="{{banner.image}}">
+			<image mode="aspectFill" src="{{item}}"></image>
+		</swiper-item>
+	</swiper>
 	<van-button>vant button</van-button>
 </view>

@@ -7,10 +7,22 @@ cloud.init()
 exports.main = async (event, context) => {
 	const wxContext = cloud.getWXContext()
 
-	return {
-		event,
-		openid: wxContext.OPENID,
-		appid: wxContext.APPID,
-		unionid: wxContext.UNIONID,
+	let type = event.type
+	let result = null
+
+	if(type == 'banner'){
+		//获取录播图配置
+		result = await cloud.database().collection('config').where({
+			name:'轮播图'
+		}).get()
+	}else{
+		result =  {
+			event,
+			openid: wxContext.OPENID,
+			appid: wxContext.APPID,
+			unionid: wxContext.UNIONID,
+		}
 	}
+	console.log(result)
+	return result
 }
