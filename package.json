@@ -4,12 +4,17 @@
   "description": "",
   "main": ".eslintrc.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"tw_build": "npx tailwindcss --no-autoprefixer -i ./tailwind.css -o ./miniprogram/output.wxss --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dayjs": "^1.11.3",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "2.2.16",
+    "tailwindcss-miniprogram-preset": "^2.1.2"
   }
 }

@@ -1,3 +1,5 @@
+/* 引入tailwindcss */
+@import 'output.wxss';
 /**app.wxss**/
 .container {
   height: 100%;

@@ -1,0 +1,7 @@
+/* ./your-css-folder/styles.css */
+/* 前两项在小程序用不到，暂时注释掉*/
+/*
+@tailwind base;
+@tailwind components;
+*/
+@tailwind utilities;

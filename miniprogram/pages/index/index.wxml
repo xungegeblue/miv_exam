@@ -1,9 +1,11 @@
 <!--index.wxml-->
 <view>
-	<swiper autoplay="true" interval="1000" circular="true" indicator-dots="true" indicator-color="white" indicator-active-color="black" style="width: 100%;">
-		<swiper-item  wx:for="{{banner.image}}">
-			<image mode="aspectFill" src="{{item}}"></image>
-		</swiper-item>
-	</swiper>
-	<van-button>vant button</van-button>
+	<view class="p-4 bg-red-100">
+		<swiper autoplay="true" interval="1000" circular="true" indicator-dots="true" indicator-color="white" indicator-active-color="black" style="width: 100%;">
+			<swiper-item wx:for="{{banner.image}}">
+				<image mode="aspectFill" src="{{item}}"></image>
+			</swiper-item>
+		</swiper>
+	</view>
+	<van-button class="mt-3">vant button</van-button>
 </view>
