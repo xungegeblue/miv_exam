@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<view class="container">
+  hello 小程序 ！
+	<van-button>vant button</van-button>
+</view>
