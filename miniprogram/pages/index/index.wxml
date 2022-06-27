@@ -17,5 +17,8 @@
 
 	<van-cell title="最新题库" is-link value="更多题库" />
 	
+	<view wx:for="{{tiList}}">
+		<van-cell title="{{item.name}}" value="" size="large" label="题目数量{{item.size}}" />
+	</view>
 
 </view>

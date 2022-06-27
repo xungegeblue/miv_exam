@@ -12,6 +12,16 @@ Page({
 		wx.cloud.callFunction({
 			name: 'index',
 			data:{
+				type:'tiku'
+			}
+		}).then(res=>{
+			let tiList = res.result
+			this.setData({tiList})
+		})
+
+		wx.cloud.callFunction({
+			name: 'index',
+			data:{
 				type:'banner'
 			}
 		}).then(res=>{
