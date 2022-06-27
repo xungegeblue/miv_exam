@@ -11,7 +11,7 @@
 	"setting": {
 		"urlCheck": true,
 		"coverView": true,
-		"es6": true,
+		"es6": false,
 		"postcss": true,
 		"lazyloadPlaceholderEnable": false,
 		"preloadBackgroundData": false,
@@ -19,7 +19,7 @@
 		"autoAudits": false,
 		"uglifyFileName": false,
 		"uploadWithSourceMap": true,
-		"enhance": true,
+		"enhance": false,
 		"useMultiFrameRuntime": true,
 		"showShadowRootInWxmlPanel": true,
 		"packNpmManually": true,

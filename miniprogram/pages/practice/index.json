@@ -1,6 +1,7 @@
 {
 	"navigationBarTitleText": "章节练习",
 	"usingComponents": {
-		"van-button": "../../compoents/button/index"
+		"van-button": "../../compoents/button/index",
+		"van-tag": "../../compoents/tag/index"
 	}
 }

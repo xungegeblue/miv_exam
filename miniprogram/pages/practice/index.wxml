@@ -1,17 +1,26 @@
 <view>
 	<view class="text-center bg-blue-300 p-1">
-		<van-button plain type="info" class="mr-1" size="small">答题模式</van-button>
-		<van-button plain type="primary" size="small">背题模式</van-button>
+		<van-button plain type="info" class="mr-1">答题模式</van-button>
+		<van-button plain type="primary">背题模式</van-button>
 	</view>
-	<swiper>
-		<swiper-item wx:for="{{tiList}}" wx:key="index">
-			<view>{{item.type}}</view>
-			<view>{{item.name}}</view>
-			<view>
-				<view wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal">
-					{{skey}}. {{sVal}}
+	<swiper bindchange="swiperChange" style="height: {{ swiperHeight }}">
+		<swiper-item wx:for="{{tiList}}" wx:key="index" class="" data-id="{{index}}">
+			<view class="block deh" id="swiper-{{index}}">
+				<view class="inline-block mr-1 mt-4 pl-4">{{current+1}}/{{tiList.length}}</view>
+				<van-tag type="success" size="small">{{item.type}}</van-tag>
+				<view class="font-semibold text-xl mt-4 pl-4">{{item.name}}</view>
+				<view class="text-lg mt-8 pl-8 pr-8 leading-10">
+					<view  class="bg-gray-300 block pl-4 pr-4" style="height: 1px;"></view>
+					<view class="item_border"  wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal">
+						<view class=""><span class="ml-4;mr-1">{{skey}}.</span> {{sVal}}</view>
+						<view class="bg-gray-300 block pl-4 pr-4" style="height: 1px;"></view>
+					</view>
 				</view>
 			</view>
 		</swiper-item>
 	</swiper>
+	<!-- 正确答案 and 错误答案 -->
+	<view>
+		
+	</view>
 </view>

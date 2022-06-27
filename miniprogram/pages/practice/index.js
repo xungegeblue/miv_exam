@@ -7,6 +7,8 @@ Page({
 	data: {
 		id:null,//题库ID
 		tiList:[],//所有题目
+		current:0,
+		swiperHeight:0
 	},
 
 	/**
@@ -15,6 +17,11 @@ Page({
 	onLoad(options) {
 		let id = options.id
 		this.init()
+	},
+	swiperChange(e){
+		let current = e.detail.current
+		this.setData({current})
+		this.getHeight('deh')
 	},
 	/**
 	 * 下载题库信息
@@ -29,7 +36,21 @@ Page({
 		}).then(res=>{
 			let tiList = res.result
 			this.setData({tiList})
-			console.log(tiList)
+			this.getHeight()
 		})
-	}
+	},
+	getHeight() {  //根据不同的类名，去获取不同的内容高度
+		// 获取元素高度
+		let query = wx.createSelectorQuery();
+		//选择id
+		let that = this;
+		let id =  '#swiper-' + this.data.current
+		query.select(id).boundingClientRect(function (rect) {
+			console.log(rect)
+			console.log(rect.height + 20 + 'px')
+			 that.setData({
+					swiperHeight: rect.height + 20 + 'px'
+			 })
+		}).exec();
+ },
 })

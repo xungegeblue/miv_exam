@@ -1,1 +1,5 @@
-/* pages/practice/index.wxss */
+
+.item_border{
+	border-left: 1px rgba(209, 213, 219) solid;
+	border-right: 1px rgba(209, 213, 219) solid;
+}
