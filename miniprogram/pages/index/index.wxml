@@ -1,11 +1,21 @@
 <!--index.wxml-->
 <view>
-	<view class="p-4 bg-red-100">
-		<swiper autoplay="true" interval="1000" circular="true" indicator-dots="true" indicator-color="white" indicator-active-color="black" style="width: 100%;">
+	<view class="p-4">
+		<swiper autoplay="true" interval="3000" circular="true" indicator-dots="true" indicator-color="white" indicator-active-color="black" style="width: 100%;">
 			<swiper-item wx:for="{{banner.image}}">
-				<image mode="aspectFill" src="{{item}}"></image>
+				<image class="w-full" mode="aspectFill" src="{{item}}"></image>
 			</swiper-item>
 		</swiper>
 	</view>
-	<van-button class="mt-3">vant button</van-button>
+
+	<van-grid>
+		<van-grid-item icon="bulb-o" text="练习" />
+		<van-grid-item icon="newspaper-o" text="公告" />
+		<van-grid-item icon="bar-chart-o" text="排行榜" />
+		<van-grid-item icon="notes-o" text="说明" />
+	</van-grid>
+
+	<van-cell title="最新题库" is-link value="更多题库" />
+	
+
 </view>

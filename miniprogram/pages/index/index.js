@@ -5,7 +5,8 @@ const dayjs = require('../../lib/dayjs')
 
 Page({
 	data:{
-		banner:{}
+		banner:{},
+		tiList:[]
 	},
 	onLoad(){
 		wx.cloud.callFunction({

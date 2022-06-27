@@ -1,5 +1,11 @@
 {
+	"navigationBarTitleText": "主页",
 	"usingComponents": {
-		"van-button": "../../compoents/button/index"
+		"van-button": "../../compoents/button/index",
+		"van-image": "../../compoents/image/index",
+		"van-grid": "../../compoents/grid/index",
+		"van-grid-item": "../../compoents/grid-item/index",
+		"van-tag": "../../compoents/tag/index",
+		"van-cell": "../../compoents/cell/index"
 	}
 }
