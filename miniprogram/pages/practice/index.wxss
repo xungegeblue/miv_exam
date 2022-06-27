@@ -1,5 +1,13 @@
 
 .item_border{
-	border-left: 1px rgba(209, 213, 219) solid;
-	border-right: 1px rgba(209, 213, 219) solid;
+	border: 1px #cecece solid;
+	margin-bottom: 10px;
+	padding: 4px;
+}
+.item_border:hover{
+	background: red;
+}
+
+.border_color{
+	border: 1px rgba(209, 213, 219) solid;
 }
