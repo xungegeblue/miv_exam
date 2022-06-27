@@ -1,5 +1,7 @@
 <!--index.wxml-->
 <view>
+	<van-nav-bar title="知识库练习" custom-style="padding-top:0px;"/>
+
 	<view class="p-4">
 		<swiper autoplay="true" interval="3000" circular="true" indicator-dots="true" indicator-color="white" indicator-active-color="black" style="width: 100%;">
 			<swiper-item wx:for="{{banner.image}}">
@@ -16,9 +18,13 @@
 	</van-grid>
 
 	<van-cell title="最新题库" is-link value="更多题库" />
-	
+
 	<view wx:for="{{tiList}}">
-		<van-cell title="{{item.name}}" value="" size="large" label="题目数量{{item.size}}" />
+		<van-cell  value="" size="large" label="题目数量{{item.size}}" >
+			<view slot="title">
+				<view class="van-cell-text text-base font-medium">{{item.name}}</view>
+			</view>
+		</van-cell>
 	</view>
 
 </view>

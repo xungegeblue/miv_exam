@@ -1,8 +1,12 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
+
 const _ = require('lodash')
 
 cloud.init()
+
+const db = cloud.database();
+const cm = db.command;
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -27,6 +31,17 @@ exports.main = async (event, context) => {
 			}
 		})
 		result = tiList
+	}else if('dati'){
+		//查询题库
+		let store_id = event.store_id
+		let store = (await cloud.database().collection('store').doc(store_id).get()).data;
+		//查询所有的题目
+		let question_ids = store.question_ids
+		
+		let questions = (await cloud.database().collection('questions').where({_id:cm.in(question_ids)}).get()).data
+	
+		//返回所有的题目
+		result = questions
 	}else{
 		result =  {
 			event,
@@ -35,6 +50,5 @@ exports.main = async (event, context) => {
 			unionid: wxContext.UNIONID,
 		}
 	}
-	console.log(result)
 	return result
 }

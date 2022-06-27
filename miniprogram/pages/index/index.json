@@ -6,6 +6,7 @@
 		"van-grid": "../../compoents/grid/index",
 		"van-grid-item": "../../compoents/grid-item/index",
 		"van-tag": "../../compoents/tag/index",
-		"van-cell": "../../compoents/cell/index"
+		"van-cell": "../../compoents/cell/index",
+		"van-nav-bar": "../../compoents/nav-bar/index"
 	}
 }

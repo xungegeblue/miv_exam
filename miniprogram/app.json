@@ -3,18 +3,19 @@
 		"pages/index/index",
 		"pages/me/index",
 		"pages/store/index",
-		"pages/exam/index"
+		"pages/exam/index",
+		"pages/practice/index"
 	],
 	"window": {
 		"backgroundTextStyle": "light",
 		"navigationBarBackgroundColor": "#fff",
-		"navigationBarTitleText": "Weixin",
+		"navigationBarTitleText": "答题小程序",
 		"navigationBarTextStyle": "black"
 	},
 	"tabBar": {
 		"custom": false,
-		"color": "#8a8a8a",
-		"selectedColor": "#ff4e00",
+		"color": "blue",
+		"selectedColor": "blue",
 		"list": [
 			{
 				"pagePath": "pages/index/index",

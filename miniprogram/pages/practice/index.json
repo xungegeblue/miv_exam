@@ -1,0 +1,6 @@
+{
+	"navigationBarTitleText": "章节练习",
+	"usingComponents": {
+		"van-button": "../../compoents/button/index"
+	}
+}

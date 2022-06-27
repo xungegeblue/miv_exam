@@ -1,0 +1,17 @@
+<view>
+	<view class="text-center bg-blue-300 p-1">
+		<van-button plain type="info" class="mr-1" size="small">答题模式</van-button>
+		<van-button plain type="primary" size="small">背题模式</van-button>
+	</view>
+	<swiper>
+		<swiper-item wx:for="{{tiList}}" wx:key="index">
+			<view>{{item.type}}</view>
+			<view>{{item.name}}</view>
+			<view>
+				<view wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal">
+					{{skey}}. {{sVal}}
+				</view>
+			</view>
+		</swiper-item>
+	</swiper>
+</view>
