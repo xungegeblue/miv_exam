@@ -1,0 +1,13 @@
+function indexOf(arr, value) {
+	if(arr == null || arr===undefined){
+		return false
+	}
+	if (arr.indexOf(value) < 0) {
+			return false;
+	} else {
+			return true;
+	}
+}
+module.exports = {
+	indexOf : indexOf
+}

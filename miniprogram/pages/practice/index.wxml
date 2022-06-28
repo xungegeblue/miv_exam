@@ -1,7 +1,9 @@
+<wxs src="../wxs/tool.wxs" module="tool"/>
+
 <view>
 	<view class="text-center bg-blue-300 p-1">
-		<van-button plain type="info" class="mr-1">答题模式</van-button>
-		<van-button plain type="primary">背题模式</van-button>
+		<van-button bindtap="changeMode" data-mode="dati" class="mr-1" color="{{mode==='dati'?'green':''}}">答题模式</van-button>
+		<van-button bindtap="changeMode" data-mode="beiti" color="{{mode==='beiti'?'green':''}}">背题模式</van-button>
 	</view>
 	<swiper bindchange="swiperChange" style="height: {{ swiperHeight }}" current="{{current}}" easing-function="linear">
 		<swiper-item wx:for="{{tiList}}" wx:key="index" class="" data-id="{{index}}">
@@ -9,18 +11,29 @@
 				<view class="inline-block mr-1 mt-4 pl-4">{{current+1}}/{{tiList.length}}</view>
 				<van-tag type="success" size="small">{{item.type}}</van-tag>
 				<view class="font-semibold text-xl mt-4 pl-4">{{item.name}}</view>
-				<view class="text-lg mt-8 pl-8 pr-8 leading-8">
-					<view class="item_border rounded-sm bg-gray-50" wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal" bindtap="handlerAnswer" data-answer="{{skey}}">
-						<view class="{{answer[current]==skey?'bg-green-100':''}}"><span class="ml-4;mr-1">{{skey}}.</span> {{sVal}}</view>
-					</view>
 
+				<!-- 题目选项（答题模式） -->
+				<view class="text-lg mt-8 pl-8 pr-8 leading-8" wx:if="{{mode === 'dati'}}">
+					<view class="item_border rounded-sm bg-gray-50" wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal" bindtap="handlerAnswer" data-answer="{{skey}}">
+						<view class="{{tool.indexOf(answer[current],skey)?'bg-green-100':''}}"><span class="ml-4;mr-1">{{skey}}.</span> {{sVal}}</view>
+					</view>
+					<van-button bindtap="goNext" wx:if="{{item.type === '多选题' && okSubmit[current]!=true}}" color="green" block>确定选择</van-button>
 				</view>
+				<!-- 题目选项（背题模式) -->
+				<view class="text-lg mt-8 pl-8 pr-8 leading-8" wx:if="{{mode === 'beiti'}}">
+					<view class="item_border rounded-sm bg-gray-50" wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal" data-answer="{{skey}}">
+					
+						<view class="{{tool.indexOf(trueAnswer[current],skey)?'bg-green-100':''}}"><span class="ml-4;mr-1">{{skey}}.</span> {{sVal}} 
+						</view>
+					</view>
+				</view>
+		
 			</view>
 		</swiper-item>
 	</swiper>
-	<!-- 答题模式 -->
-	<!-- 正确答案 and 错误答案 and 解析 -->
-	<view wx:if="{{answer[current]}}">
+	
+	<!-- 正确答案 and 错误答案 and 解析（答题模式） -->
+	<view wx:if="{{okSubmit[current] && mode ==='dati'}}">
 		<view class="ml-20 mr-20 mt-4 flex flex-row justify-center tracking-wider border_color">
 			<view class="text-center m-4 ">
 				<view class="text-green-300">我的答案</view>
@@ -37,6 +50,19 @@
 			<view class="font-light mt-1">{{tiList[current].note == null ? '无':tiList[current].note}}</view>
 		</view>
 	</view>
-	<!-- 背题模式、考试模式 -->
+	<!-- 正确答案 and 错误答案 and 解析（背题模式） -->
+	<view wx:if="{{mode ==='beiti'}}">
+		<view class="ml-20 mr-20 mt-4 flex flex-row justify-center tracking-wider border_color">
+			<view class="text-center m-4">
+				<view class="text-red-300">正确答案</view>
+				<view class="mt-3 text-lg">{{tiList[current]['true']}}</view>
+			</view>
+		</view>
+		<view class="pl-4 mt-4">
+			<view>解析：</view>
+			<view class="font-light mt-1">{{tiList[current].note == null ? '无':tiList[current].note}}</view>
+		</view>
+	</view>
+
 
 </view>

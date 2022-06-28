@@ -1,4 +1,5 @@
-// pages/practice/index.js
+require('../../lib/lodash-fix')
+const _ = require('../../lib/lodash.min');
 Page({
 
 	/**
@@ -9,8 +10,10 @@ Page({
 		tiList: [], //所有题目
 		current: 0,
 		swiperHeight: 0,
-		mode: 'beiti', //答题模式（dati）、背题模式（beiti）、考试模式(kaoshi)
+		mode: 'dati', //答题模式（dati）、背题模式（beiti）、考试模式(kaoshi)
 		answer: {}, //回答过的题目
+		trueAnswer:{}, //正确答案
+		okSubmit:{}//确认选择（current->true/false)
 	},
 
 	/**
@@ -42,6 +45,11 @@ Page({
 			this.setData({
 				tiList
 			})
+			let trueAnswer = {}
+			_.forEach(tiList,(v,k)=>{
+				trueAnswer[k] = v.true
+			})
+			this.setData({trueAnswer})
 			this.getHeight()
 		})
 	},
@@ -61,37 +69,53 @@ Page({
 	},
 	//切换下一题 
 	goNext() {
-
-		// let current = this.data.current
-		// if (current + 1 < this.data.tiList.length) {
-		// 	console.log('....')
-		// 	this.setData({
-		// 		current: current + 1
-		// 	})
-		// }
-		// console.log(this.data.answer)
+		this.setData({
+			['okSubmit[' + this.data.current + ']']: true
+		})
+			console.log(this.data.answer)
+			console.log(this.data.okSubmit)
 
 	},
 	handlerAnswer(e) {
-		//需要判断是否多选题
+		
 		let item = this.data.tiList[this.data.current]
 		let type = item.type
 		let the_answer = e.currentTarget.dataset.answer
-
-		if(this.data.answer[this.data.current]!=null){
+		
+		//已经选择过了
+		if(this.data.okSubmit[this.data.current] === true){
+			console.log('选择过了')
 			return
 		}
 
-		this.setData({
-			['answer[' + this.data.current + ']']: the_answer
-		})
-
 		if (type === '多选题') {
-
+			//判断题
+			let str = this.data.answer[this.data.current]
+			
+			if(str == null){
+				this.setData({
+					['answer[' + this.data.current + ']']: the_answer
+				})
+			}else if(str.indexOf(the_answer)==-1){
+				this.setData({
+					['answer[' + this.data.current + ']']: the_answer+str
+				})
+			}else{
+				this.setData({
+					['answer[' + this.data.current + ']']: str.replace(the_answer,"")
+				})
+			}
 		} else {
 			//单选、或者判断题
+			this.setData({
+				['answer[' + this.data.current + ']']: the_answer
+			})
 			this.goNext()
 		}
 		//console.log(this.data.answer)
+	},
+	changeMode(e){
+		let mode = e.currentTarget.dataset.mode
+		this.setData({mode})
 	}
 })
