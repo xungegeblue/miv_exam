@@ -1,6 +1,6 @@
-<wxs src="../wxs/tool.wxs" module="tool"/>
+<wxs src="../wxs/tool.wxs" module="tool" />
 
-<view>
+<view style="height: 100vh;">
 	<view class="text-center bg-blue-300 p-1">
 		<van-button bindtap="changeMode" data-mode="dati" class="mr-1" color="{{mode==='dati'?'green':''}}">答题模式</van-button>
 		<van-button bindtap="changeMode" data-mode="beiti" color="{{mode==='beiti'?'green':''}}">背题模式</van-button>
@@ -22,16 +22,16 @@
 				<!-- 题目选项（背题模式) -->
 				<view class="text-lg mt-8 pl-8 pr-8 leading-8" wx:if="{{mode === 'beiti'}}">
 					<view class="item_border rounded-sm bg-gray-50" wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal" data-answer="{{skey}}">
-					
-						<view class="{{tool.indexOf(trueAnswer[current],skey)?'bg-green-100':''}}"><span class="ml-4;mr-1">{{skey}}.</span> {{sVal}} 
+
+						<view class="{{tool.indexOf(trueAnswer[current],skey)?'bg-green-100':''}}"><span class="ml-4;mr-1">{{skey}}.</span> {{sVal}}
 						</view>
 					</view>
 				</view>
-		
+
 			</view>
 		</swiper-item>
 	</swiper>
-	
+
 	<!-- 正确答案 and 错误答案 and 解析（答题模式） -->
 	<view wx:if="{{okSubmit[current] && mode ==='dati'}}">
 		<view class="ml-20 mr-20 mt-4 flex flex-row justify-center tracking-wider border_color">
@@ -64,5 +64,42 @@
 		</view>
 	</view>
 
+	<!-- 选项卡 -->
+
+	<view style="position: absolute;bottom: 0px;height: 40px;line-height: 40px;" class="bg-gray-200 w-full text-center">
+		<view>
+
+			<van-icon name="success" color="green" size="large" />
+			{{trueCount}}
+			<van-icon name="cross" color="red" size="large" />
+			{{errorCount}}
+
+			<view class="float-right inline-block mr-3" bindtap="showMobal">
+				<van-icon name="apps-o" size="large" />
+				{{current+1}}/{{tiList.length}}
+			</view>
+
+		</view>
+	</view>
+
+	<van-popup closeable bind:close="close" show="{{popup}}" round position="bottom" custom-style="height: 50%">
+		<view class="mt-4 flex-row pl-2 pr-2">
+			<view wx:for="{{scoreMap}}" class="inline-block">
+		
+				<view wx:if="{{okSubmit[index]!=true}}" class="bg-gray-300 text-center leading-10 rounded-full  inline-block w-10 h-10 m-1 text-white" bindtap="changeTi" data-current="{{index}}">
+					{{index+1}}
+				</view>
+				<view wx:elif="{{item}}" class="bg-green-300 text-center leading-10 rounded-full  inline-block w-10 h-10 m-1 text-white" bindtap="changeTi" data-current="{{index}}">
+					{{index+1}}
+				</view>
+				<view wx:else class="bg-red-300 text-center leading-10 rounded-full  inline-block w-10 h-10 m-1 text-white" bindtap="changeTi" data-current="{{index}}">
+					{{index+1}}
+				</view>
+				
+
+			</view>
+
+		</view>
+	</van-popup>
 
 </view>

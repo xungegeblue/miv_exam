@@ -1,5 +1,7 @@
 require('../../lib/lodash-fix')
 const _ = require('../../lib/lodash.min');
+import {strSort} from '../../lib/tool'
+
 Page({
 
 	/**
@@ -13,7 +15,11 @@ Page({
 		mode: 'dati', //答题模式（dati）、背题模式（beiti）、考试模式(kaoshi)
 		answer: {}, //回答过的题目
 		trueAnswer:{}, //正确答案
-		okSubmit:{}//确认选择（current->true/false)
+		okSubmit:[],//确认选择（current->true/false)
+		scoreMap:[],//答题情况（current-是否正确）
+		trueCount:0,
+		errorCount:0,
+		popup:false,
 	},
 
 	/**
@@ -42,10 +48,17 @@ Page({
 			}
 		}).then(res => {
 			let tiList = res.result
+			//排序好正确答案
+			_.forEach(tiList,(v,k)=>{
+				v.true = strSort(v.true)
+			})
 			this.setData({
-				tiList
+				tiList,
+				scoreMap:  new Array(tiList.length),
+				okSubmit: new Array(tiList.length)
 			})
 			let trueAnswer = {}
+			
 			_.forEach(tiList,(v,k)=>{
 				trueAnswer[k] = v.true
 			})
@@ -69,12 +82,40 @@ Page({
 	},
 	//切换下一题 
 	goNext() {
+		console.log('----goNext-------')
+
 		this.setData({
 			['okSubmit[' + this.data.current + ']']: true
 		})
-			console.log(this.data.answer)
-			console.log(this.data.okSubmit)
 
+
+		// console.log(this.data.answer)
+		// console.log(this.data.okSubmit)
+
+		let okSubmit = this.data.okSubmit
+		let scoreMap = new Array(this.data.tiList.length)
+		let trueCount = 0;
+		let errorCount = 0;
+		_.forEach(this.data.tiList,(v,k)=>{
+			console.log('for .....')
+			if(okSubmit[k]){
+				//答题完毕
+				let a = this.data.answer[k]
+				let b = this.data.trueAnswer[k]
+				let status = a===b
+				if(status){
+					trueCount+=1
+				}else{
+					errorCount+=1
+				}
+				scoreMap[k] = status
+			}else{
+				scoreMap[k] = undefined
+			}
+		})
+		
+		this.setData({scoreMap,trueCount,errorCount})
+		
 	},
 	handlerAnswer(e) {
 		
@@ -98,7 +139,7 @@ Page({
 				})
 			}else if(str.indexOf(the_answer)==-1){
 				this.setData({
-					['answer[' + this.data.current + ']']: the_answer+str
+					['answer[' + this.data.current + ']']: strSort(the_answer+str)
 				})
 			}else{
 				this.setData({
@@ -117,5 +158,21 @@ Page({
 	changeMode(e){
 		let mode = e.currentTarget.dataset.mode
 		this.setData({mode})
+	},
+	showMobal(){
+		console.log('sho')
+		this.setData({popup:true})
+	},
+	close(){
+		this.setData({popup:false})
+	},
+	changeTi(e){
+		let current = e.currentTarget.dataset.current
+		if(current === this.data.current){
+			this.setData({popup:false})	
+		}else{
+			let popup = false
+			this.setData({current,popup})
+		}
 	}
 })
