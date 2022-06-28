@@ -1,2 +1,69 @@
-<!--pages/exam/index.wxml-->
-<text>pages/exam/index.wxml</text>
+<wxs src="../wxs/tool.wxs" module="tool" />
+
+<view style="height: 100vh;">
+
+	<swiper bindchange="swiperChange" style="height: {{ swiperHeight }}" current="{{current}}" easing-function="linear">
+		<swiper-item wx:for="{{tiList}}" wx:key="index" class="" data-id="{{index}}">
+			<view class="block deh" id="swiper-{{index}}">
+				<view class="inline-block mr-1 mt-4 pl-4">{{current+1}}/{{tiList.length}}</view>
+				<van-tag type="success" size="small">{{item.type}}</van-tag>
+				<view class="font-semibold text-xl mt-4 pl-4">{{item.name}}</view>
+
+				<!-- 题目选项（答题模式） -->
+				<view class="text-lg mt-8 pl-8 pr-8 leading-8" wx:if="{{mode === 'dati'}}">
+					<view class="item_border rounded-sm bg-gray-50" wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal" bindtap="handlerAnswer" data-answer="{{skey}}">
+						<view class="{{tool.indexOf(answer[current],skey)?'bg-green-100':''}}"><span class="ml-4;mr-1">{{skey}}.</span> {{sVal}}</view>
+					</view>
+				</view>
+				<!-- 题目选项（背题模式) -->
+				<view class="text-lg mt-8 pl-8 pr-8 leading-8" wx:if="{{mode === 'beiti'}}">
+					<view class="item_border rounded-sm bg-gray-50" wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal" data-answer="{{skey}}">
+
+						<view class="{{tool.indexOf(trueAnswer[current],skey)?'bg-green-100':''}}"><span class="ml-4;mr-1">{{skey}}.</span> {{sVal}}
+						</view>
+					</view>
+				</view>
+
+			</view>
+		</swiper-item>
+	</swiper>
+
+
+
+	<!-- 选项卡 -->
+
+	<view style="position: absolute;bottom: 0px;height: 40px;line-height: 40px;" class="bg-gray-200 w-full text-center">
+		<view>
+			<view class="float-right inline-block mr-3" bindtap="showMobal">
+				<van-icon name="apps-o" size="large" />
+				{{current+1}}/{{tiList.length}}
+			</view>
+		</view>
+	</view>
+
+	<van-popup closeable bind:close="close" show="{{popup}}" round position="bottom" custom-style="height: 50%">
+		<view class="mt-4 flex-row pl-2 pr-2">
+			<view wx:for="{{okSubmit}}" class="inline-block">
+
+				<view wx:if="{{okSubmit[index]==true}}" class="bg-green-300 text-center leading-10 rounded-full  inline-block w-10 h-10 m-1 text-white" bindtap="changeTi" data-current="{{index}}">
+					{{index+1}}
+				</view>
+
+				<view wx:else class="bg-gray-300 text-center leading-10 rounded-full  inline-block w-10 h-10 m-1 text-white" bindtap="changeTi" data-current="{{index}}">
+					{{index+1}}
+				</view>
+			</view>
+
+		</view>
+	</van-popup>
+
+	<view class="p-4" wx:if="{{current+1 == tiList.length}}">
+		<van-button block color="green" bindtap="submit">提交试卷</van-button>
+	</view>
+
+	<van-dialog use-slot show="{{ show }}" show-cancel-button bind:confirm="onClose">
+		<view class="text-center p-5">
+			是否确定交卷？
+		</view>
+	</van-dialog>
+</view>

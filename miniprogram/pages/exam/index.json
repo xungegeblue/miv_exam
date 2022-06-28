@@ -1,3 +1,10 @@
 {
-	"usingComponents": {}
+	"navigationBarTitleText": "考试",
+	"usingComponents": {
+		"van-button": "../../compoents/button/index",
+		"van-tag": "../../compoents/tag/index",
+		"van-popup": "../../compoents/popup/index",
+		"van-icon": "../../compoents/icon/index",
+		"van-dialog":"../../compoents/dialog/index"
+	}
 }

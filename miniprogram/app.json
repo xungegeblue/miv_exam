@@ -4,7 +4,9 @@
 		"pages/me/index",
 		"pages/store/index",
 		"pages/exam/index",
-		"pages/practice/index"
+		"pages/practice/index",
+		"pages/exam_list/index",
+		"pages/exam_result/index"
 	],
 	"window": {
 		"backgroundTextStyle": "light",
@@ -30,7 +32,7 @@
 				"text": "题库"
 			},
 			{
-				"pagePath": "pages/exam/index",
+				"pagePath": "pages/exam_list/index",
 				"iconPath": "images/tab_bar/icon-3.png",
 				"selectedIconPath": "images/tab_bar/icon-3.png",
 				"text": "考试"

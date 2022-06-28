@@ -11,13 +11,17 @@
 			"list": [
 				{
 					"name": "",
-					"pathName": "pages/practice/index",
+					"pathName": "pages/exam/index",
 					"query": "",
 					"launchMode": "default",
-					"scene": null
+					"scene": null,
+					"partialCompile": {
+						"enabled": true,
+						"pages": []
+					}
 				}
 			]
 		}
 	},
-	"libVersion": "2.24.1"
+	"libVersion": "2.19.6"
 }
