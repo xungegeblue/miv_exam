@@ -187,9 +187,9 @@ Page({
 					let a = this.data.scoreMap[k]
 					if(a!=true){
 						errorCount+=1
-						score+=v.score
 					}else{
 						trueCount+=1
+						score+=v.score
 					}
 			})
 			rate = ((trueCount * 100)/(trueCount + errorCount) * 100) 

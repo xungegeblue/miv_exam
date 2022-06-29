@@ -1,6 +1,6 @@
 <view class="p-4">
 	<view class="text-lg mt-10">{{name}}</view>
-	<view class="">共{{trueCount+errorCount}}题，满分{{allScore}}</view>
+	<view class="">共{{trueCount+errorCount}}题，满分{{score}}</view>
 
 	<view class="mt-10">
 		<view class="text-center text-4xl text-yellow-400">{{score}}分</view>
