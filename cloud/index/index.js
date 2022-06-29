@@ -89,7 +89,16 @@ exports.main = async (event, context) => {
 			//这里有缺陷，需要提示用户不存在
 			result = {...user[0]}
 		}
-	}else{
+	}else if('add_record'){
+    //记录答题情况
+    let openid = wxContext.OPENID
+    let {name,score,all_score,true_count,error_count,rate,exam_id} = event
+    cloud.database().collection('record').add({
+      data:{
+        name,score,all_score,true_count,error_count,rate,exam_id,openid
+      }
+    })
+  }else{
 		result =  {
 			event,
 			openid: wxContext.OPENID,

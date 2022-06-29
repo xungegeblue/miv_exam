@@ -199,7 +199,8 @@ Page({
 			item.name = this.data.exam.name
 			item = JSON.stringify(item)
 			console.log("item:"+item)
-
+      //记录答题情况
+      
 			wx.navigateTo({
 				url: '/pages/exam_result/index?item='+item,
 			})

@@ -53,8 +53,9 @@ Page({
 			}
 		}).then(res=>{
 				//保存数据
-				app.globalData.userInfo = res.result
-				console.log(app.globalData)
+        //[会丢失]app.globalData.userInfo = res.result
+        let userInfo = res.result
+				wx.setStorageSync('userInfo',userInfo)
 				//返回页面
 				wx.navigateBack({
 					delta: 1,

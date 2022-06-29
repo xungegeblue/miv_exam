@@ -13,9 +13,10 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow() {
-		console.log('show...')
-		let userInfo = app.globalData.userInfo
-		if(userInfo!=null){
+
+    let userInfo = wx.getStorageSync('userInfo')
+
+		if(userInfo!=null && userInfo!=""){
 			this.setData({
 				hasUserInfo:true,
 				userInfo,

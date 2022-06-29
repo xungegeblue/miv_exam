@@ -16,7 +16,7 @@
 					"launchMode": "default",
 					"scene": null,
 					"partialCompile": {
-						"enabled": true,
+						"enabled": false,
 						"pages": [
 							"pages/info/index"
 						]
