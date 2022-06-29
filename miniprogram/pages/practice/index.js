@@ -20,6 +20,7 @@ Page({
 		trueCount:0,
 		errorCount:0,
 		popup:false,
+		loadding:false,
 	},
 
 	/**
@@ -27,6 +28,7 @@ Page({
 	 */
 	onLoad(options) {
 		let id = options.id
+		this.setData({id})
 		this.init()
 	},
 	swiperChange(e) {
@@ -44,13 +46,16 @@ Page({
 			name: 'index',
 			data: {
 				type: 'dati',
-				store_id: "6d85a2b962b967f40d115e651c0b7410"
+				store_id: this.data.id
 			}
 		}).then(res => {
 			let tiList = res.result
 			//排序好正确答案
 			_.forEach(tiList,(v,k)=>{
 				v.true = strSort(v.true)
+			})
+			this.setData({
+				loadding:true
 			})
 			this.setData({
 				tiList,

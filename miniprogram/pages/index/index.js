@@ -30,5 +30,11 @@ Page({
 					banner
 				})
 		})
+	},
+	goPractice(e){
+		let id = e.currentTarget.dataset.item._id
+		wx.navigateTo({
+			url: `/pages/practice/index?id=${id}`,
+		})
 	}
 })

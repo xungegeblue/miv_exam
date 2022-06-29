@@ -1,5 +1,5 @@
 <view class="p-4">
-	<view class="text-lg mt-10">公司答题考试第一场</view>
+	<view class="text-lg mt-10">{{name}}</view>
 	<view class="">共{{trueCount+errorCount}}题，满分{{allScore}}</view>
 
 	<view class="mt-10">
@@ -25,6 +25,6 @@
 	</view>
 
 	<view class="mt-10">
-		<van-button>返回主页</van-button>
+		<van-button block bindtap="back">返回主页</van-button>
 	</view>
 </view>

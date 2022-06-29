@@ -5,11 +5,12 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-		score: 97,
-		allScore: 100,
-		trueCount: 5,
-		errorCount: 6,
-		rate: 48
+		score: 0,
+		allScore: 0,
+		trueCount: 0,
+		errorCount: 0,
+		rate: 0,
+		name:''
 	},
 
 	/**
@@ -17,8 +18,15 @@ Page({
 	 */
 	onLoad(options) {
 		//显示考试情况
+		let item = JSON.parse(options.item)
+		this.setData({...item})
+		//记录答题情况
 	},
-
+	back(){
+		wx.navigateBack({
+			delta: 3,
+		})
+	},
 	/**
 	 * 用户点击右上角分享
 	 */

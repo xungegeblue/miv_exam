@@ -31,7 +31,7 @@ exports.main = async (event, context) => {
 			}
 		})
 		result = tiList
-	}else if('dati'){
+	}else if(type == 'dati'){
 		//查询题库
 		let store_id = event.store_id
 		let store = (await cloud.database().collection('store').doc(store_id).get()).data;
@@ -42,6 +42,28 @@ exports.main = async (event, context) => {
 	
 		//返回所有的题目
 		result = questions
+	}else if(type == 'kaoshi_list'){
+		let res = await cloud.database().collection('exam').get()
+		let tiList = res.data
+		_.flatMap(tiList,item=>{
+			if(item.question_ids){
+				item.size = item.question_ids.length
+			}else{
+				item.size = 0
+			}
+		})
+		result = tiList
+	}else if(type == 'kaoshi'){
+		//查询题库
+		let exam_id = event.exam_id
+		let exam = (await cloud.database().collection('exam').doc(exam_id).get()).data;
+		//查询所有的题目
+		let question_ids = exam.question_ids
+
+		let questions = (await cloud.database().collection('questions').where({_id:cm.in(question_ids)}).get()).data
+
+		//返回所有的题目
+		result = {exam,questions}
 	}else{
 		result =  {
 			event,

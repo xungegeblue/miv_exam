@@ -1,2 +1,9 @@
-<!--pages/store/index.wxml-->
-<text>pages/store/index.wxml</text>
+<view>
+	<view wx:for="{{tiList}}" bindtap="goPractice" data-item="{{item}}">
+		<van-cell value="" size="large" label="题目数量{{item.size}}">
+			<view slot="title">
+				<view class="van-cell-text text-base font-medium">{{item.name}}</view>
+			</view>
+		</van-cell>
+	</view>
+</view>

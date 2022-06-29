@@ -1,91 +1,96 @@
 <wxs src="../wxs/tool.wxs" module="tool" />
 
 <view style="height: 100vh;">
+
 	<view class="text-center bg-blue-300 p-1">
 		<van-button bindtap="changeMode" data-mode="dati" class="mr-1" color="{{mode==='dati'?'green':''}}">答题模式</van-button>
 		<van-button bindtap="changeMode" data-mode="beiti" color="{{mode==='beiti'?'green':''}}">背题模式</van-button>
 	</view>
-	<swiper bindchange="swiperChange" style="height: {{ swiperHeight }}" current="{{current}}" easing-function="linear">
-		<swiper-item wx:for="{{tiList}}" wx:key="index" class="" data-id="{{index}}">
-			<view class="block deh" id="swiper-{{index}}">
-				<view class="inline-block mr-1 mt-4 pl-4">{{current+1}}/{{tiList.length}}</view>
-				<van-tag type="success" size="small">{{item.type}}</van-tag>
-				<view class="font-semibold text-xl mt-4 pl-4">{{item.name}}</view>
 
-				<!-- 题目选项（答题模式） -->
-				<view class="text-lg mt-8 pl-8 pr-8 leading-8" wx:if="{{mode === 'dati'}}">
-					<view class="item_border rounded-sm bg-gray-50" wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal" bindtap="handlerAnswer" data-answer="{{skey}}">
-						<view class="{{tool.indexOf(answer[current],skey)?'bg-green-100':''}}"><span class="ml-4;mr-1">{{skey}}.</span> {{sVal}}</view>
+	<view wx:if="{{loadding}}">
+
+		<swiper bindchange="swiperChange" style="height: {{ swiperHeight }}" current="{{current}}" easing-function="linear">
+			<swiper-item wx:for="{{tiList}}" wx:key="index" class="" data-id="{{index}}">
+				<view class="block deh" id="swiper-{{index}}">
+					<view class="inline-block mr-1 mt-4 pl-4">{{current+1}}/{{tiList.length}}</view>
+					<van-tag type="success" size="small">{{item.type}}</van-tag>
+					<view class="font-semibold text-xl mt-4 pl-4">{{item.name}}</view>
+
+					<!-- 题目选项（答题模式） -->
+					<view class="text-lg mt-8 pl-8 pr-8 leading-8" wx:if="{{mode === 'dati'}}">
+						<view class="item_border rounded-sm bg-gray-50" wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal" bindtap="handlerAnswer" data-answer="{{skey}}">
+							<view class="{{tool.indexOf(answer[current],skey)?'bg-green-100':''}}"><span class="ml-4;mr-1">{{skey}}.</span> {{sVal}}</view>
+						</view>
+						<van-button bindtap="goNext" wx:if="{{item.type === '多选题' && okSubmit[current]!=true}}" color="green" block>确定选择</van-button>
 					</view>
-					<van-button bindtap="goNext" wx:if="{{item.type === '多选题' && okSubmit[current]!=true}}" color="green" block>确定选择</van-button>
-				</view>
-				<!-- 题目选项（背题模式) -->
-				<view class="text-lg mt-8 pl-8 pr-8 leading-8" wx:if="{{mode === 'beiti'}}">
-					<view class="item_border rounded-sm bg-gray-50" wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal" data-answer="{{skey}}">
+					<!-- 题目选项（背题模式) -->
+					<view class="text-lg mt-8 pl-8 pr-8 leading-8" wx:if="{{mode === 'beiti'}}">
+						<view class="item_border rounded-sm bg-gray-50" wx:for="{{item.option}}" wx:for-index='skey' wx:for-item="sVal" data-answer="{{skey}}">
 
-						<view class="{{tool.indexOf(trueAnswer[current],skey)?'bg-green-100':''}}"><span class="ml-4;mr-1">{{skey}}.</span> {{sVal}}
+							<view class="{{tool.indexOf(trueAnswer[current],skey)?'bg-green-100':''}}"><span class="ml-4;mr-1">{{skey}}.</span> {{sVal}}
+							</view>
 						</view>
 					</view>
+
+				</view>
+			</swiper-item>
+		</swiper>
+
+		<!-- 正确答案 and 错误答案 and 解析（答题模式） -->
+		<view wx:if="{{okSubmit[current] && mode ==='dati'}}">
+			<view class="ml-20 mr-20 mt-4 flex flex-row justify-center tracking-wider border_color">
+				<view class="text-center m-4 ">
+					<view class="text-green-300">我的答案</view>
+					<view class="mt-3 text-lg">{{answer[current]}}</view>
+				</view>
+				<view class="" style="margin-top: 20px;width: 1px;height: 55px;background: rgba(209, 213, 219);"></view>
+				<view class="text-center m-4">
+					<view class="text-red-300">正确答案</view>
+					<view class="mt-3 text-lg">{{tiList[current]['true']}}</view>
+				</view>
+			</view>
+			<view class="pl-4 mt-4">
+				<view>解析：</view>
+				<view class="font-light mt-1">{{tiList[current].note == null ? '无':tiList[current].note}}</view>
+			</view>
+		</view>
+		<!-- 正确答案 and 错误答案 and 解析（背题模式） -->
+		<view wx:if="{{mode ==='beiti'}}">
+			<view class="ml-20 mr-20 mt-4 flex flex-row justify-center tracking-wider border_color">
+				<view class="text-center m-4">
+					<view class="text-red-300">正确答案</view>
+					<view class="mt-3 text-lg">{{tiList[current]['true']}}</view>
+				</view>
+			</view>
+			<view class="pl-4 mt-4">
+				<view>解析：</view>
+				<view class="font-light mt-1">{{tiList[current].note == null ? '无':tiList[current].note}}</view>
+			</view>
+		</view>
+
+		<!-- 选项卡 -->
+
+		<view style="position: absolute;bottom: 0px;height: 40px;line-height: 40px;" class="bg-gray-200 w-full text-center">
+			<view>
+
+				<van-icon name="success" color="green" size="large" />
+				{{trueCount}}
+				<van-icon name="cross" color="red" size="large" />
+				{{errorCount}}
+
+				<view class="float-right inline-block mr-3" bindtap="showMobal">
+					<van-icon name="apps-o" size="large" />
+					{{current+1}}/{{tiList.length}}
 				</view>
 
 			</view>
-		</swiper-item>
-	</swiper>
+		</view>
 
-	<!-- 正确答案 and 错误答案 and 解析（答题模式） -->
-	<view wx:if="{{okSubmit[current] && mode ==='dati'}}">
-		<view class="ml-20 mr-20 mt-4 flex flex-row justify-center tracking-wider border_color">
-			<view class="text-center m-4 ">
-				<view class="text-green-300">我的答案</view>
-				<view class="mt-3 text-lg">{{answer[current]}}</view>
-			</view>
-			<view class="" style="margin-top: 20px;width: 1px;height: 55px;background: rgba(209, 213, 219);"></view>
-			<view class="text-center m-4">
-				<view class="text-red-300">正确答案</view>
-				<view class="mt-3 text-lg">{{tiList[current]['true']}}</view>
-			</view>
-		</view>
-		<view class="pl-4 mt-4">
-			<view>解析：</view>
-			<view class="font-light mt-1">{{tiList[current].note == null ? '无':tiList[current].note}}</view>
-		</view>
 	</view>
-	<!-- 正确答案 and 错误答案 and 解析（背题模式） -->
-	<view wx:if="{{mode ==='beiti'}}">
-		<view class="ml-20 mr-20 mt-4 flex flex-row justify-center tracking-wider border_color">
-			<view class="text-center m-4">
-				<view class="text-red-300">正确答案</view>
-				<view class="mt-3 text-lg">{{tiList[current]['true']}}</view>
-			</view>
-		</view>
-		<view class="pl-4 mt-4">
-			<view>解析：</view>
-			<view class="font-light mt-1">{{tiList[current].note == null ? '无':tiList[current].note}}</view>
-		</view>
-	</view>
-
-	<!-- 选项卡 -->
-
-	<view style="position: absolute;bottom: 0px;height: 40px;line-height: 40px;" class="bg-gray-200 w-full text-center">
-		<view>
-
-			<van-icon name="success" color="green" size="large" />
-			{{trueCount}}
-			<van-icon name="cross" color="red" size="large" />
-			{{errorCount}}
-
-			<view class="float-right inline-block mr-3" bindtap="showMobal">
-				<van-icon name="apps-o" size="large" />
-				{{current+1}}/{{tiList.length}}
-			</view>
-
-		</view>
-	</view>
-
 	<van-popup closeable bind:close="close" show="{{popup}}" round position="bottom" custom-style="height: 50%">
 		<view class="mt-4 flex-row pl-2 pr-2">
 			<view wx:for="{{scoreMap}}" class="inline-block">
-		
+
 				<view wx:if="{{okSubmit[index]!=true}}" class="bg-gray-300 text-center leading-10 rounded-full  inline-block w-10 h-10 m-1 text-white" bindtap="changeTi" data-current="{{index}}">
 					{{index+1}}
 				</view>
@@ -95,7 +100,7 @@
 				<view wx:else class="bg-red-300 text-center leading-10 rounded-full  inline-block w-10 h-10 m-1 text-white" bindtap="changeTi" data-current="{{index}}">
 					{{index+1}}
 				</view>
-				
+
 
 			</view>
 

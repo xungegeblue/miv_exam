@@ -19,8 +19,8 @@
 
 	<van-cell title="最新题库" is-link value="更多题库" />
 
-	<view wx:for="{{tiList}}">
-		<van-cell  value="" size="large" label="题目数量{{item.size}}" >
+	<view wx:for="{{tiList}}" bindtap="goPractice" data-item="{{item}}">
+		<van-cell  value="" size="large"  label="题目数量{{item.size}}" >
 			<view slot="title">
 				<view class="van-cell-text text-base font-medium">{{item.name}}</view>
 			</view>

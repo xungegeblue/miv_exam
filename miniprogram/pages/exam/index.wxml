@@ -2,6 +2,7 @@
 
 <view style="height: 100vh;">
 
+	
 	<swiper bindchange="swiperChange" style="height: {{ swiperHeight }}" current="{{current}}" easing-function="linear">
 		<swiper-item wx:for="{{tiList}}" wx:key="index" class="" data-id="{{index}}">
 			<view class="block deh" id="swiper-{{index}}">

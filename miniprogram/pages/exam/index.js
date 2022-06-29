@@ -10,6 +10,7 @@ Page({
 	 */
 	data: {
 		id: null, //题库ID
+		exam:null,
 		tiList: [], //所有题目
 		current: 0,
 		swiperHeight: 0,
@@ -20,13 +21,16 @@ Page({
 		scoreMap:[],//答题情况（current-是否正确）
 		popup:false,
 		show:false,
+		loadding:false,
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad(options) {
-		//let id = options.id
+		let id = options.id
+		console.log(id)
+		this.setData({id})
 		this.init()
 	},
 	swiperChange(e) {
@@ -43,16 +47,19 @@ Page({
 		wx.cloud.callFunction({
 			name: 'index',
 			data: {
-				type: 'dati',
-				store_id: "6d85a2b962b967f40d115e651c0b7410"
+				type: 'kaoshi',
+				exam_id: this.data.id
 			}
 		}).then(res => {
-			let tiList = res.result
+			let tiList = res.result.questions
+			let exam = res.result.exam
 			//排序好正确答案
 			_.forEach(tiList,(v,k)=>{
 				v.true = strSort(v.true)
 			})
+			this.setData({loadding:true})
 			this.setData({
+				exam,
 				tiList,
 				scoreMap:  new Array(tiList.length),
 				okSubmit: new Array(tiList.length)
@@ -188,12 +195,14 @@ Page({
 			rate = ((trueCount * 100)/(trueCount + errorCount) * 100) 
 			rate = Math.round(rate/100)
 
-			console.log("score:"+score)
-			console.log("allScore:"+allScore)
-			console.log("trueCount:"+trueCount)
-			console.log("errorCount:"+errorCount)
-			console.log("rate:"+rate)
-			
+			let item = {score,allScore,trueCount,errorCount,rate}
+			item.name = this.data.exam.name
+			item = JSON.stringify(item)
+			console.log("item:"+item)
+
+			wx.navigateTo({
+				url: '/pages/exam_result/index?item='+item,
+			})
 		}
 	}
 })

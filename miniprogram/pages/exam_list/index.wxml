@@ -1,2 +1,9 @@
-<!--pages/exam_list/index.wxml-->
-<text>pages/exam_list/index.wxml</text>
+<view>
+	<view wx:for="{{tiList}}" bindtap="goExam" data-item="{{item}}">
+		<van-cell value="" size="large">
+			<view slot="title">
+				<view class="van-cell-text text-base font-medium">{{item.name}}</view>
+			</view>
+		</van-cell>
+	</view>
+</view>
