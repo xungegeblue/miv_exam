@@ -1,0 +1,7 @@
+{
+	"navigationBarTitleText": "考试记录",
+	"usingComponents": {
+    "van-cell": "../../compoents/cell/index",
+		"van-cell-group": "../../compoents/cell-group/index"
+  }
+}

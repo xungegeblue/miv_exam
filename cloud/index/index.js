@@ -89,15 +89,26 @@ exports.main = async (event, context) => {
 			//这里有缺陷，需要提示用户不存在
 			result = {...user[0]}
 		}
-	}else if('add_record'){
+	}else if(type == 'add_record'){
+    console.log('添加记录...')
     //记录答题情况
     let openid = wxContext.OPENID
     let {name,score,all_score,true_count,error_count,rate,exam_id} = event
-    cloud.database().collection('record').add({
+    result = (await cloud.database().collection('record').add({
       data:{
         name,score,all_score,true_count,error_count,rate,exam_id,openid
       }
-    })
+    }))
+  }else if(type == 'get_record'){
+    let id = event.id
+    let res = (await cloud.database().collection('record').doc(id).get()).data
+    result = res
+  }else if(type == 'record_list'){
+    let openid = wxContext.OPENID
+    let res = (await cloud.database().collection('record').where({
+      openid
+    }).get()).data
+    result = res
   }else{
 		result =  {
 			event,

@@ -1,30 +1,36 @@
 <view class="p-4">
-	<view class="text-lg mt-10">{{name}}</view>
-	<view class="">共{{trueCount+errorCount}}题，满分{{score}}</view>
+	<view wx:if="{{loadding}}">
+		<view class="text-lg mt-10">{{name}}</view>
+		<view class="">共{{true_count+error_count}}题，满分{{score}}</view>
 
-	<view class="mt-10">
-		<view class="text-center text-4xl text-yellow-400">{{score}}分</view>
-		<view>
-			<view class="ml-10 mr-10 mt-4 flex flex-row justify-center tracking-wider border_color">
-				<view class="text-center m-4 ">
-					<view class="text-green-300 text-lg">{{trueCount}}题</view>
-					<view class="mt-3 text-gray-400">答对</view>
-				</view>
-				<view class="" style="margin-top: 20px;width: 1px;height: 60px;background: rgba(209, 213, 219);"></view>
-				<view class="text-center m-4">
-					<view class="text-red-300  text-lg">{{errorCount}}题</view>
-					<view class="mt-3 text-gray-400">答错</view>
-				</view>
-				<view class="" style="margin-top: 20px;width: 1px;height: 60px;background: rgba(209, 213, 219);"></view>
-				<view class="text-center m-4">
-					<view class="text-lg">{{rate}}%</view>
-					<view class="mt-3 text-gray-400">正确率</view>
+		<view class="mt-10">
+			<view class="text-center text-4xl text-yellow-400">{{score}}分</view>
+			<view>
+				<view class="ml-10 mr-10 mt-4 flex flex-row justify-center tracking-wider border_color">
+					<view class="text-center m-4 ">
+						<view class="text-green-300 text-lg">{{true_count}}题</view>
+						<view class="mt-3 text-gray-400">答对</view>
+					</view>
+					<view class="" style="margin-top: 20px;width: 1px;height: 60px;background: rgba(209, 213, 219);"></view>
+					<view class="text-center m-4">
+						<view class="text-red-300  text-lg">{{error_count}}题</view>
+						<view class="mt-3 text-gray-400">答错</view>
+					</view>
+					<view class="" style="margin-top: 20px;width: 1px;height: 60px;background: rgba(209, 213, 219);"></view>
+					<view class="text-center m-4">
+						<view class="text-lg">{{rate}}%</view>
+						<view class="mt-3 text-gray-400">正确率</view>
+					</view>
 				</view>
 			</view>
 		</view>
-	</view>
 
-	<view class="mt-10">
-		<van-button block bindtap="back">返回主页</van-button>
+		<view class="mt-10">
+			<van-button block bindtap="back">返回主页</van-button>
+		</view>
+
+	</view>
+	<view wx:if="{{!loadding}}" class="text-center">
+		加载中...
 	</view>
 </view>

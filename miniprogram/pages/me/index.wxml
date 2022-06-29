@@ -10,7 +10,7 @@
 	<view class="mt-2">
 		<van-cell-group>
 			<van-cell icon="friends-o" title="关于我们"/>
-			<van-cell icon="bar-chart-o" title="考试记录"/>
+			<van-cell icon="bar-chart-o" title="考试记录" bindtap="goRecord"/>
 		</van-cell-group>
 	</view>
 </view>

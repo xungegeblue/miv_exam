@@ -194,16 +194,35 @@ Page({
 			})
 			rate = ((trueCount * 100)/(trueCount + errorCount) * 100) 
 			rate = Math.round(rate/100)
-
-			let item = {score,allScore,trueCount,errorCount,rate}
-			item.name = this.data.exam.name
-			item = JSON.stringify(item)
-			console.log("item:"+item)
+		
       //记录答题情况
+      let userInfo = wx.getStorageSync('userInfo')
+      console.log('------')
+      console.log(typeof userInfo)
+      let param = {
+        name:userInfo.name,
+        all_score:allScore,
+        true_count:trueCount,
+        error_count:errorCount,
+        rate,
+        score,
+        exam_id:this.data.exam._id
+      }
       
-			wx.navigateTo({
-				url: '/pages/exam_result/index?item='+item,
-			})
+      wx.cloud.callFunction({
+        name: 'index',
+        data:{
+          type:'add_record',
+          ...param
+        }
+      }).then(res=>{
+        console.log('保存成功！')
+        let id  = res.result._id
+        wx.navigateTo({
+				  url: '/pages/exam_result/index?id='+id,
+			  })
+      })
+		
 		}
 	}
 })

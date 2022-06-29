@@ -8,7 +8,8 @@
 		"pages/exam_list/index",
 		"pages/exam_result/index",
 		"pages/info/index",
-		"pages/biz/index"
+		"pages/biz/index",
+		"pages/record/index"
 	],
 	"window": {
 		"backgroundTextStyle": "light",

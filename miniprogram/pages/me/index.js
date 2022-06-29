@@ -28,5 +28,10 @@ Page({
 		wx.navigateTo({
 			url: '/pages/info/index',
 		})
+	},
+	goRecord(){
+		wx.navigateTo({
+			url: '/pages/record/index',
+		})
 	}
 })

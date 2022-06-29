@@ -1,0 +1,7 @@
+<view>
+<van-cell-group>
+  <van-cell data-item="{{item}}" bindtap="goExamResult" wx:for="{{rcList}}"  title="{{item.name}}的考试记录{{index+1}}">
+   得分{{item.score}}
+  </van-cell>
+</van-cell-group>
+</view>
