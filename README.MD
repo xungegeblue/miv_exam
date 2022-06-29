@@ -52,12 +52,12 @@
 
 ## 页面展示
 
-<img src="./md/主页.png">
-<img src="./md/答题页1.png">
-<img src="./md/答题页2.png">
-<img src="./md/考试.png">
-<img src="./md/题库.png">
-<img src="./md/考试结果.png">
-<img src="./md/我的.png">
+<img src="./md/主页.png" width="200">
+<img src="./md/答题页1.png" width="200">
+<img src="./md/答题页2.png" width="200">
+<img src="./md/考试.png" width="200">
+<img src="./md/题库.png" width="200">
+<img src="./md/考试结果.png" width="200">
+<img src="./md/我的.png" width="200">
 <img src="./md/内容模型1.png">
 <img src="./md/内容模型2.png">
