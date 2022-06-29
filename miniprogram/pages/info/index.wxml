@@ -1,0 +1,25 @@
+<view class="p-4">
+  <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+    <image class="avatar rounded-lg" src="{{avatar}}"></image>
+  </button> 
+	<van-cell-group class="">
+		<van-field
+			label="用户名"
+			value="{{ name }}"
+			placeholder="请输入用户名"
+			border="{{ false }}"
+			bind:change="changeName"
+		/>
+	</van-cell-group>
+	<van-cell-group class="" style="margin-top: 0px;">
+		<van-field
+			label="备注"
+			value="{{ remark }}"
+			placeholder="请输入备注信息"
+			border="{{ false }}"
+			bind:change="changeRemark"
+		/>
+	</van-cell-group>
+	<view class="mt-4"></view>
+	<van-button bindtap="saveInfo" block style="margin-top: 50vh" color="green">保存</van-button>
+</view>

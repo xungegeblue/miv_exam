@@ -2,6 +2,9 @@
 
 
 App({
+	globalData:{
+    userInfo:null,
+  },
 	onLaunch(){
     //初始化云开发环境，环境地址根据实际情况修改！
 		wx.cloud.init({

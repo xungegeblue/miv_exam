@@ -11,7 +11,7 @@
 			"list": [
 				{
 					"name": "",
-					"pathName": "pages/index/index",
+					"pathName": "pages/info/index",
 					"query": "",
 					"launchMode": "default",
 					"scene": null
@@ -19,5 +19,5 @@
 			]
 		}
 	},
-	"libVersion": "2.19.6"
+	"libVersion": "2.24.7"
 }

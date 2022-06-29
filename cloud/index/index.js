@@ -64,6 +64,31 @@ exports.main = async (event, context) => {
 
 		//返回所有的题目
 		result = {exam,questions}
+	}else if(type === 'login'){
+		let name = event.name
+		let avatar = event.avatar
+		let remark = event.remark
+		let openid = wxContext.OPENID
+		let unionid =  wxContext.UNIONID
+		//如果用户不存在就保存
+		let user = (await cloud.database().collection('user').where({
+			openid
+		}).get()).data
+
+		if(user.length == 0){
+			cloud.database().collection('user').add({
+				data:{
+					name,
+					remark,
+					avatar,
+					openid,
+					unionid
+				}
+			})
+		}else{
+			//这里有缺陷，需要提示用户不存在
+			result = {...user[0]}
+		}
 	}else{
 		result =  {
 			event,

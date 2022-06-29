@@ -1,3 +1,5 @@
 <view>
-	
+	<view class="w-full h-40 bg-green-100 flex flex-col">
+			<van-button bindtap="getUserInfo" color="green" class="mt-12 align-middle self-center">点击登录</van-button>
+	</view>
 </view>
