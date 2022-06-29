@@ -11,14 +11,10 @@
 			"list": [
 				{
 					"name": "",
-					"pathName": "pages/exam/index",
+					"pathName": "pages/index/index",
 					"query": "",
 					"launchMode": "default",
-					"scene": null,
-					"partialCompile": {
-						"enabled": true,
-						"pages": []
-					}
+					"scene": null
 				}
 			]
 		}

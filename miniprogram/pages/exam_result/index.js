@@ -5,7 +5,11 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-
+		score: 97,
+		allScore: 100,
+		trueCount: 5,
+		errorCount: 6,
+		rate: 48
 	},
 
 	/**

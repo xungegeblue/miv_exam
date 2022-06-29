@@ -115,7 +115,7 @@ Page({
 		let the_answer = e.currentTarget.dataset.answer
 		
 		
-
+		
 		if (type === '多选题') {
 			//判断题
 			let str = this.data.answer[this.data.current]
