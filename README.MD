@@ -52,4 +52,12 @@
 
 ## 页面展示
 
-![主页]("./md/主页.png")
+<img src="./md/主页.png">
+<img src="./md/答题页1.png">
+<img src="./md/答题页2.png">
+<img src="./md/考试.png">
+<img src="./md/题库.png">
+<img src="./md/考试结果.png">
+<img src="./md/我的.png">
+<img src="./md/内容模型1.png">
+<img src="./md/内容模型2.png">
