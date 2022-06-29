@@ -1,4 +1,4 @@
-// pages/me/index.js
+const app = getApp()
 Page({
 
 	/**
@@ -10,12 +10,22 @@ Page({
 	},
 
 	/**
-	 * 生命周期函数--监听页面加载
+	 * 生命周期函数--监听页面显示
 	 */
-	onLoad(options) {
-
+	onShow() {
+		console.log('show...')
+		let userInfo = app.globalData.userInfo
+		if(userInfo!=null){
+			this.setData({
+				hasUserInfo:true,
+				userInfo,
+			})
+		}
 	},
 	getUserInfo(){
 		//用户登录
+		wx.navigateTo({
+			url: '/pages/info/index',
+		})
 	}
 })

@@ -7,7 +7,8 @@
 		"pages/practice/index",
 		"pages/exam_list/index",
 		"pages/exam_result/index",
-		"pages/info/index"
+		"pages/info/index",
+		"pages/biz/index"
 	],
 	"window": {
 		"backgroundTextStyle": "light",

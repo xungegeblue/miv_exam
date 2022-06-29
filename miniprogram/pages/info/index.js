@@ -66,6 +66,18 @@ Page({
 			name:e.detail
 		})
 	},
+	getInfo(){
+		wx.getUserProfile({
+			desc: 'desc',
+			success: (params)=>{
+				let userInfo = params.userInfo
+				this.setData({
+					avatar: userInfo.avatarUrl,
+					name: userInfo.nickName
+				})
+			}
+		})
+	},
 	changeRemark(e){
 		this.setData({
 			remark:e.detail

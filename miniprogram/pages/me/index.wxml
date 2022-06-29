@@ -1,5 +1,16 @@
-<view>
-	<view class="w-full h-40 bg-green-100 flex flex-col">
-			<van-button bindtap="getUserInfo" color="green" class="mt-12 align-middle self-center">点击登录</van-button>
+<view class="bg-gray-100" style="height: 100vh;">
+	<view class="w-full h-36  flex flex-col bg-white">
+		<van-button wx:if="{{!hasUserInfo}}" bindtap="getUserInfo" class="mt-10 items-center self-center">填写信息</van-button>
+
+		<view wx:if="{{hasUserInfo}}" class="mt-4 ml-4 flex flex-row items-center">
+			<van-image  round width="5rem" height="5rem" fit="contain" src="{{userInfo.avatar}}" />
+			<view class="ml-4">{{userInfo.name}}</view>
+		</view>
+	</view>
+	<view class="mt-2">
+		<van-cell-group>
+			<van-cell icon="friends-o" title="关于我们"/>
+			<van-cell icon="bar-chart-o" title="考试记录"/>
+		</van-cell-group>
 	</view>
 </view>

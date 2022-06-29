@@ -11,10 +11,16 @@
 			"list": [
 				{
 					"name": "",
-					"pathName": "pages/info/index",
+					"pathName": "pages/me/index",
 					"query": "",
 					"launchMode": "default",
-					"scene": null
+					"scene": null,
+					"partialCompile": {
+						"enabled": true,
+						"pages": [
+							"pages/info/index"
+						]
+					}
 				}
 			]
 		}
