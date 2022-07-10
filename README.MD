@@ -34,10 +34,6 @@ QQ群 ： 631830116
 
 1. 管理后台使用了微信自带的CMS进行管理
 
-# 学习文档
-
-1. https://xiaoshitou.blog.csdn.net/article/details/112391688
-
 
 # 项目配置说明
 
